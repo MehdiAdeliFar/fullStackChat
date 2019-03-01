@@ -4,6 +4,7 @@ import {Video} from '../video';
 import {Customer} from '../customer';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AdminLoginModel} from '../adminLoginModel';
+import {Room} from "../Room";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -16,10 +17,10 @@ export class BackendService {
   apiAddress = 'http://127.0.0.1:3000/api';
   data: any;
 
-  getVideos(): Observable<Video[]> {
+  getRooms(): Observable<Room[]> {
     // return of(this.videos);
 
-    return this.http.get<Video[]>(this.apiAddress + '/video', httpOptions);
+    return this.http.get<Room[]>(this.apiAddress + '/room', httpOptions);
   }
 
   getCustomersForReserve(): Observable<Customer[]> {

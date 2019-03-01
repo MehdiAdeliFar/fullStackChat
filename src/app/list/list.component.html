@@ -1,0 +1,34 @@
+<nav class=" navbar navbar-light bg-light">
+  <span>Room List</span>
+  <button (click)="logout()"  class="btn btn-primary float-right">Logout</button>
+</nav>
+<hr>
+<div class="row">
+  <div class="col">
+    <div class="form-group col-md-5 m-auto">
+      <input class="form-control" [(ngModel)]="searchQuery" placeholder="Search">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table class="table table-hover table-bordered m-2">
+      <tr>
+        <th>Name</th>
+        <th>Create Date</th>
+        <th>Members</th>
+
+        <th></th>
+      </tr>
+      <tr *ngFor="let vid of getQueryFilteredRooms()">
+        <td>{{vid.name}}</td>
+        <td>{{vid.date}} minutes</td>
+        <td>{{vid.members.length}}</td>
+
+        <td><a  href="/join/{{vid._id}}" class="btn btn-secondary">Join</a></td>
+        <!--todo make join work-->
+      </tr>
+    </table>
+  </div>
+</div>
+

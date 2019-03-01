@@ -1,6 +1,7 @@
 const mongoose=require('mongoose');
 const room_schema=mongoose.Schema({
    name:{type:String,required:true},
+  date:Date,
    messages:[{
        username:String,
        date:Date,
