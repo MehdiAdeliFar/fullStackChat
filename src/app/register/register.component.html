@@ -1,0 +1,24 @@
+<div *ngIf="error">
+  <h4 class="alert-danger">{{error}}</h4>
+</div>
+
+<div class="col-md-4 m-auto">
+  <div class="card m-4">
+    <div class="card-header">
+      Register
+    </div>
+    <div class="card-body">
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" placeholder="Username" id="username" [(ngModel)]="login">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="password">
+      </div>
+      <button (click)="register()" class="btn btn-primary ">Register Me</button>
+      <a href="/login" class="btn btn-secondary m-3">Login</a>
+    </div>
+  </div>
+</div>
