@@ -6,6 +6,10 @@ const room_schema=mongoose.Schema({
        date:Date,
        text:String,
        type:String
-   }]
+   }],
+    members:[{
+       username:String,
+        sessionId:String
+    }]
 });
 module.exports=mongoose.model('room',room_schema);
