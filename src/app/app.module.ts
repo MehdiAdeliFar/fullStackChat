@@ -15,6 +15,9 @@ import {AngularFileUploaderModule} from 'angular-file-uploader';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ChatsComponent } from './chats/chats.component';
+import { RoomListComponent } from './admin/room-list/room-list.component';
+import { RoomEditComponent } from './admin/room-edit/room-edit.component';
+import { EventsComponent } from './admin/events/events.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { ChatsComponent } from './chats/chats.component';
     AdminCustomerListComponent,
     LoginComponent,
     RegisterComponent,
-    ChatsComponent
+    ChatsComponent,
+    RoomListComponent,
+    RoomEditComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,

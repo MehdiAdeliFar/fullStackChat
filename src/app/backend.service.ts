@@ -3,8 +3,8 @@ import {Observable, of} from 'rxjs';
 import {Video} from '../video';
 import {Customer} from '../customer';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {AdminLoginModel} from '../adminLoginModel';
-import {Room} from "../Room";
+import {LoginModel} from '../loginModel';
+import {Room} from '../Room';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class BackendService {
-  apiAddress = 'http://127.0.0.1:3000/api';
+  apiAddress = 'http://localhost:3000/api';
   data: any;
 
   getRooms(): Observable<Room[]> {
@@ -70,9 +70,9 @@ export class BackendService {
     return this.http.delete(`${this.apiAddress}/video/${id}`, myHttpOptions);
   }
 
-  login(admin: AdminLoginModel) {
+  login(loginModel: LoginModel) {
 
-    return this.http.post(this.apiAddress + '/auth/login', admin, httpOptions);
+    return this.http.post(this.apiAddress + '/auth/', loginModel, httpOptions);
   }
 
 
@@ -90,5 +90,9 @@ export class BackendService {
 
   reserveVideo(vid: Video) {
     return this.http.post(`${this.apiAddress}/video/reserve/${vid._id}`, vid, httpOptions);
+  }
+
+  register(loginModel: LoginModel) {
+    return this.http.post(this.apiAddress + '/auth/register', loginModel, httpOptions);
   }
 }

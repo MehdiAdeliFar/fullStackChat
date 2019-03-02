@@ -6,20 +6,23 @@ import {AdminCustomerListComponent} from '../admin/admin-customer-list/admin-cus
 import {ReserveComponent} from '../reserve/reserve.component';
 import {AdminListComponent} from '../admin/admin-list/admin-list.component';
 import {AdminNewVideoComponent} from '../admin/admin-new-video/admin-new-video.component';
-import {RegisterComponent} from "../register/register.component";
-import {LoginComponent} from "../login/login.component";
+import {RegisterComponent} from '../register/register.component';
+import {LoginComponent} from '../login/login.component';
+import {RoomListComponent} from '../admin/room-list/room-list.component';
 
 const routes: Routes = [
-  {path: 'list', component: ListComponent},
+  // {path: 'list', component: ListComponent},
   // {path: '', redirectTo: '/list', pathMatch: 'full'},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'customers', component: AdminCustomerListComponent},
   {path: 'reserve/:id', component: ReserveComponent},
   {path: 'adminlist', component: AdminListComponent},
+  {path: 'rooms', component: RoomListComponent},
+  {path: 'roomSelect', component: ListComponent},
   {path: 'admin-edit-video/:id', component: AdminNewVideoComponent},
   {path: 'admin-edit-video', component: AdminNewVideoComponent},
-  {path:'register',component:RegisterComponent}
+  {path: 'register', component: RegisterComponent}
   // ,{path:'adminDashboard',component:RegisterComponent}
 
 ];

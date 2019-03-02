@@ -4,6 +4,7 @@ const mongoose=require('mongoose');
 const bodyParser = require('body-parser');
 const app=express();
 
+const authenticateRoute=require('./authenticate/authenticate');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -17,5 +18,5 @@ app.use((req, res, next) => {
 
     next();
 });
-
+app.use('/api/auth',authenticateRoute);
 module.exports=app;

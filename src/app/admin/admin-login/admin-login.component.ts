@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {BackendService} from '../../backend.service';
-import {AdminLoginModel} from '../../../adminLoginModel';
+import {LoginModel} from '../../../loginModel';
 
 @Component({
   selector: 'app-admin-login',
@@ -28,7 +28,7 @@ export class AdminLoginComponent implements OnInit {
       return;
     }
     this.error = undefined;
-    const adminlogin: AdminLoginModel = {login: this.login, password: this.password, _id: ''};
+    const adminlogin: LoginModel = {login: this.login, password: this.password, _id: ''};
     this.bService.login(adminlogin).subscribe(res => {
       if (!res) {
         this.error = 'can not login';
