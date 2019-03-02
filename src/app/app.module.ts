@@ -14,6 +14,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AngularFileUploaderModule} from 'angular-file-uploader';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ChatsComponent } from './chats/chats.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RegisterComponent } from './register/register.component';
     AdminNewVideoComponent,
     AdminCustomerListComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ChatsComponent
   ],
   imports: [
     BrowserModule,
