@@ -1,0 +1,47 @@
+<nav class=" navbar navbar-light bg-light justify-content-between">
+  <span></span>
+  <span class="float-right">
+    {{login}}
+  </span>
+  <button (click)="logout()" class="btn btn-primary float-right">Logout</button>
+</nav>
+<hr>
+
+<br>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="align-self-center col-md-5">
+    <div class="form-group  ">
+      <input class="form-control" [(ngModel)]="searchQuery" placeholder="Search">
+    </div>
+  </div>
+  <div class="col-md-2">
+    <a href="/admin-edit-room" class="btn btn-success">Add new Room</a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+
+    <table class="table table-hover table-bordered m-2">
+      <tr>
+        <th>Name</th>
+        <th>Create Date</th>
+        <th>Members</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let vid of getQueryFilteredRooms()">
+        <td>{{vid.name}}</td>
+        <td>{{vid.date}} minutes</td>
+        <td>{{vid.members.length}}</td>
+        <td><a  href="/admin-room-log/{{vid._id}}" class="btn btn-secondary">Show Log</a></td>
+        <td><a  href="/admin-edit-room/{{vid._id}}" class="btn btn-secondary">Update</a></td>
+        <td><button  (click)="deleteRoom(vid)" class="btn btn-danger">Delete</button></td>
+
+      </tr>
+    </table>
+  </div>
+</div>
+
