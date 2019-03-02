@@ -11,6 +11,7 @@ import {LoginModel} from '../../loginModel';
 export class RegisterComponent implements OnInit {
   login: string;
   password: string;
+  passwordConfirm: string;
   error: string;
   data: any;
 
@@ -23,6 +24,10 @@ export class RegisterComponent implements OnInit {
   register() {
     if (!this.login || this.login.length === 0 || !this.password || this.password.length === 0) {
       this.error = 'Enter both username and password field';
+      return;
+    }
+    if (this.password !== this.passwordConfirm) {
+      this.error='Password and Password confirm not match';
       return;
     }
     const loginModel: LoginModel = {login: this.login, password: this.password, _id: ''};

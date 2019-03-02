@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class ListComponent implements OnInit {
   list: Room[];
+  login: string;
   @Input() searchQuery = '';
 
   constructor(private httpService: BackendService, private router: Router) {
@@ -28,11 +29,17 @@ export class ListComponent implements OnInit {
   getRooms() {
     this.httpService.getRooms().subscribe(roomList => {
       this.list = roomList;
-    });
+    }, er => this.router.navigate(['login']));
+  }
+
+  getLoginName() {
+    let item = localStorage.getItem('name');
+    this.login = item;
   }
 
   ngOnInit() {
     this.getRooms();
+    this.getLoginName();
   }
 
 }

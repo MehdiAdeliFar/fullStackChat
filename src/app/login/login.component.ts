@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       } else {
         this.data = res;
         if (!this.data.auth) {
-          this.error = this.data.msg;
+          this.error = this.data.errorMsg;
           this.login = '';
           this.password = '';
           return;

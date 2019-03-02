@@ -17,11 +17,7 @@ export class BackendService {
   apiAddress = 'http://localhost:3000/api';
   data: any;
 
-  getRooms(): Observable<Room[]> {
-    // return of(this.videos);
 
-    return this.http.get<Room[]>(this.apiAddress + '/room', httpOptions);
-  }
 
   getCustomersForReserve(): Observable<Customer[]> {
     return this.http.get<Customer[]>(this.apiAddress + '/customer/get', httpOptions);
@@ -91,26 +87,45 @@ export class BackendService {
   reserveVideo(vid: Video) {
     return this.http.post(`${this.apiAddress}/video/reserve/${vid._id}`, vid, httpOptions);
   }
+  getRooms(): Observable<Room[]> {
+
+    return this.http.get<Room[]>(this.apiAddress + '/room', this.getHttpOptions());
+  }
+
+  private getHttpOptions() {
+    const item = localStorage.getItem('token') != null ? localStorage.getItem('token') : '';
+
+    return {
+      headers: new HttpHeaders({'Content-Type': 'application/json', 'x-access-token': item})
+    };
+  }
 
   register(loginModel: LoginModel) {
     return this.http.post(this.apiAddress + '/auth/register', loginModel, httpOptions);
   }
 
   deleteRoom(_id: string) {
-    const item = localStorage.getItem('token') != null ? localStorage.getItem('token') : '';
 
-    const myHttpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json', 'x-access-token': item})
-    };
-    return this.http.delete(`${this.apiAddress}/room/${_id}`, myHttpOptions);
+    return this.http.delete(`${this.apiAddress}/room/${_id}`, this.getHttpOptions());
   }
 
   getAdminRooms() {
-    const item = localStorage.getItem('token') != null ? localStorage.getItem('token') : '';
 
-    const myHttpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json', 'x-access-token': item})
-    };
-    return this.http.get<Room[]>(this.apiAddress + '/room/adminList', myHttpOptions);
+    return this.http.get<Room[]>(this.apiAddress + '/room/adminList', this.getHttpOptions());
+  }
+
+  getRoom(id: string) {
+
+    return this.http.get<Room>(`${this.apiAddress}/room/${id}`, this.getHttpOptions());
+  }
+
+  updateRoom(selectedRoom: Room) {
+
+    return this.http.post(`${this.apiAddress}/room/${selectedRoom._id}`,selectedRoom, this.getHttpOptions());
+  }
+
+  addRoom(selectedRoom: Room) {
+
+    return this.http.put(this.apiAddress + '/room', JSON.stringify(selectedRoom), this.getHttpOptions());
   }
 }
