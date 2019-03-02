@@ -1,0 +1,48 @@
+<nav class=" navbar navbar-light bg-light justify-content-between">
+  <span></span>
+  <span class="float-right">
+    {{login}}
+  </span>
+  <button (click)="logout()" class="btn btn-primary float-right">Logout</button>
+</nav>
+<hr>
+<nav class="nav nav-pills nav-fill">
+  <a class="nav-item nav-link " href="/adminlist">Videos</a>
+  <a class="nav-item nav-link active" href="/customers">Customers</a>
+
+</nav>
+<br>
+<div class="row">
+  <div class="m-auto col-md-5">
+    <div class="form-group  ">
+      <input class="form-control" [(ngModel)]="searchQuery" placeholder="Search">
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col">
+
+    <table class="table table-hover table-bordered m-2">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Phone Number</th>
+        <th>Status</th>
+
+      </tr>
+      <tr *ngFor="let customer of getQueryFileteredCustomers()">
+        <td>{{customer.firstName}}</td>
+        <td>{{customer.lastName}}</td>
+        <td>{{customer.address}}</td>
+        <td>{{customer.city}}</td>
+        <td>{{customer.phoneNumber}}</td>
+        <td>{{customer.status?'Active':'Expired'}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+

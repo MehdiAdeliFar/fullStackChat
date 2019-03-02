@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-header">
+    Reserve Video
+  </div>
+  <div class="card-body">
+    <div *ngIf="error">
+      <h4 class="alert-danger">{{error}}</h4>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <img class="img-fluid" src="{{selectedVideo.imageUrl}}"/>
+      </div>
+      <div class="col-md-8">
+        <table class="table table-responsive table-responsive-lg">
+          <tr>
+            <td>Title:</td>
+            <td>{{selectedVideo.title}}</td>
+          </tr>
+          <tr>
+            <td>Running Time:</td>
+            <td>{{selectedVideo.runningTime}} Minutes</td>
+          </tr>
+          <tr>
+            <td>Genre:</td>
+            <td>{{selectedVideo.genre}}</td>
+          </tr>
+          <tr>
+            <td>Rating:</td>
+            <td>{{selectedVideo.rating}} Stars</td>
+          </tr>
+          <tr>
+            <td>Director:</td>
+            <td>{{selectedVideo.director}}</td>
+          </tr>
+          <tr>
+            <td>Customer:</td>
+            <td><select [(ngModel)]="selectedCustomerId">
+              <option *ngFor="let customer of getActiveCustomers()"  [value]="customer._id" >{{customer.firstName}}
+                {{customer.lastName}}
+              </option>
+            </select></td>
+          </tr>
+        </table>
+        <div class="row">
+          <button (click)="goBack()" class="btn btn-secondary m-3">Back</button>
+          <button class="btn btn-secondary m-3" (click)="reserve()">Reserve</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
