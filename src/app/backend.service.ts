@@ -95,4 +95,22 @@ export class BackendService {
   register(loginModel: LoginModel) {
     return this.http.post(this.apiAddress + '/auth/register', loginModel, httpOptions);
   }
+
+  deleteRoom(_id: string) {
+    const item = localStorage.getItem('token') != null ? localStorage.getItem('token') : '';
+
+    const myHttpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json', 'x-access-token': item})
+    };
+    return this.http.delete(`${this.apiAddress}/room/${_id}`, myHttpOptions);
+  }
+
+  getAdminRooms() {
+    const item = localStorage.getItem('token') != null ? localStorage.getItem('token') : '';
+
+    const myHttpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json', 'x-access-token': item})
+    };
+    return this.http.get<Room[]>(this.apiAddress + '/room/adminList', myHttpOptions);
+  }
 }

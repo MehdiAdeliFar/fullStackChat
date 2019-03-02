@@ -9,21 +9,25 @@ import {AdminNewVideoComponent} from '../admin/admin-new-video/admin-new-video.c
 import {RegisterComponent} from '../register/register.component';
 import {LoginComponent} from '../login/login.component';
 import {RoomListComponent} from '../admin/room-list/room-list.component';
+import {RoomEditComponent} from '../admin/room-edit/room-edit.component';
 
 const routes: Routes = [
   // {path: 'list', component: ListComponent},
   // {path: '', redirectTo: '/list', pathMatch: 'full'},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
+
+
   {path: 'customers', component: AdminCustomerListComponent},
   {path: 'reserve/:id', component: ReserveComponent},
   {path: 'adminlist', component: AdminListComponent},
+
+  
   {path: 'rooms', component: RoomListComponent},
   {path: 'roomSelect', component: ListComponent},
-  {path: 'admin-edit-video/:id', component: AdminNewVideoComponent},
-  {path: 'admin-edit-video', component: AdminNewVideoComponent},
+  {path: 'admin-edit-room/:id', component: RoomEditComponent},
+  {path: 'admin-edit-room', component: RoomEditComponent},
   {path: 'register', component: RegisterComponent}
-  // ,{path:'adminDashboard',component:RegisterComponent}
 
 ];
 
