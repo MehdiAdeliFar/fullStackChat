@@ -1,33 +1,24 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ListComponent} from '../list/list.component';
-import {AdminLoginComponent} from '../admin/admin-login/admin-login.component';
-import {AdminCustomerListComponent} from '../admin/admin-customer-list/admin-customer-list.component';
-import {ReserveComponent} from '../reserve/reserve.component';
-import {AdminListComponent} from '../admin/admin-list/admin-list.component';
-import {AdminNewVideoComponent} from '../admin/admin-new-video/admin-new-video.component';
 import {RegisterComponent} from '../register/register.component';
 import {LoginComponent} from '../login/login.component';
 import {RoomListComponent} from '../admin/room-list/room-list.component';
 import {RoomEditComponent} from '../admin/room-edit/room-edit.component';
+import {EventsComponent} from '../admin/events/events.component';
+import {MessageHistoryComponent} from '../admin/message-history/message-history.component';
 
 const routes: Routes = [
-  // {path: 'list', component: ListComponent},
-  // {path: '', redirectTo: '/list', pathMatch: 'full'},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-
-
-  {path: 'customers', component: AdminCustomerListComponent},
-  {path: 'reserve/:id', component: ReserveComponent},
-  {path: 'adminlist', component: AdminListComponent},
-
-  
+  {path: 'admin-room-log', component: EventsComponent},
   {path: 'rooms', component: RoomListComponent},
   {path: 'roomSelect', component: ListComponent},
   {path: 'admin-edit-room/:id', component: RoomEditComponent},
   {path: 'admin-edit-room', component: RoomEditComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: 'history', component: MessageHistoryComponent},
+  {path: 'history/:name', component: MessageHistoryComponent}
 
 ];
 

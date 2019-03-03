@@ -23,7 +23,7 @@
       </tr>
       <tr *ngFor="let vid of getQueryFilteredRooms()">
         <td>{{vid.name}}</td>
-        <td>{{vid.date}} minutes</td>
+        <td>{{vid.date|date:'yyyy/MM/dd hh:mm:ss'}} </td>
         <td>{{vid.members.length}}</td>
 
         <td><a  href="/join/{{vid._id}}" class="btn btn-secondary">Join</a></td>

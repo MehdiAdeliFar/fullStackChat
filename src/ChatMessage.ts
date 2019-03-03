@@ -3,5 +3,5 @@ export class ChatMessage {
   date: Date;
   text: string;
   type: string;
-
+  roomName: string;
 }

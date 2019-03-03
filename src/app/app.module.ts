@@ -18,6 +18,7 @@ import { ChatsComponent } from './chats/chats.component';
 import { RoomListComponent } from './admin/room-list/room-list.component';
 import { RoomEditComponent } from './admin/room-edit/room-edit.component';
 import { EventsComponent } from './admin/events/events.component';
+import { MessageHistoryComponent } from './admin/message-history/message-history.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { EventsComponent } from './admin/events/events.component';
     ChatsComponent,
     RoomListComponent,
     RoomEditComponent,
-    EventsComponent
+    EventsComponent,
+    MessageHistoryComponent
   ],
   imports: [
     BrowserModule,

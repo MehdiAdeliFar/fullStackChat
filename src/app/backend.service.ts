@@ -5,6 +5,8 @@ import {Customer} from '../customer';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginModel} from '../loginModel';
 import {Room} from '../Room';
+import {ChatEvent} from '../ChatEvent';
+import {ChatMessage} from '../ChatMessage';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -16,7 +18,6 @@ const httpOptions = {
 export class BackendService {
   apiAddress = 'http://localhost:3000/api';
   data: any;
-
 
 
   getCustomersForReserve(): Observable<Customer[]> {
@@ -87,6 +88,7 @@ export class BackendService {
   reserveVideo(vid: Video) {
     return this.http.post(`${this.apiAddress}/video/reserve/${vid._id}`, vid, httpOptions);
   }
+
   getRooms(): Observable<Room[]> {
 
     return this.http.get<Room[]>(this.apiAddress + '/room', this.getHttpOptions());
@@ -121,11 +123,23 @@ export class BackendService {
 
   updateRoom(selectedRoom: Room) {
 
-    return this.http.post(`${this.apiAddress}/room/${selectedRoom._id}`,selectedRoom, this.getHttpOptions());
+    return this.http.post(`${this.apiAddress}/room/${selectedRoom._id}`, selectedRoom, this.getHttpOptions());
   }
 
   addRoom(selectedRoom: Room) {
 
     return this.http.put(this.apiAddress + '/room', JSON.stringify(selectedRoom), this.getHttpOptions());
+  }
+
+  getAdminEvents() {
+    return this.http.get<ChatEvent[]>(this.apiAddress + '/eventlog', this.getHttpOptions());
+  }
+
+  getMessagesByRoomName(roomName: string) {
+    return this.http.post<ChatMessage[]>(this.apiAddress + '/message/roomhistory', {roomName: roomName}, this.getHttpOptions());
+  }
+
+  getMessages() {
+    return this.http.get<ChatMessage[]>(this.apiAddress + '/message/history', this.getHttpOptions());
   }
 }

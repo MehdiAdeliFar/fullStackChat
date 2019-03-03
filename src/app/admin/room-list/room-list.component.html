@@ -1,5 +1,8 @@
 <nav class=" navbar navbar-light bg-light justify-content-between">
-  <span></span>
+  <a href="/admin-edit-room" class="btn btn-success">Add new Room</a>
+  <a href="/admin-room-log" class="btn btn-info">Show Events</a>
+  <a href="/history" class="btn btn-info">Show Messages history</a>
+
   <span class="float-right">
     {{login}}
   </span>
@@ -16,7 +19,7 @@
     </div>
   </div>
   <div class="col-md-2">
-    <a href="/admin-edit-room" class="btn btn-success">Add new Room</a>
+
   </div>
 </div>
 
@@ -34,9 +37,9 @@
       </tr>
       <tr *ngFor="let vid of getQueryFilteredRooms()">
         <td>{{vid.name}}</td>
-        <td>{{vid.date}} minutes</td>
+        <td>{{vid.date|date:'yyyy/MM/dd HH:mm:ss '}} </td>
         <td>{{vid.members.length}}</td>
-        <td><a  href="/admin-room-log/{{vid._id}}" class="btn btn-secondary">Show Log</a></td>
+        <td><a  href="/history/{{vid.name}}" class="btn btn-secondary">Show Messages</a></td>
         <td><a  href="/admin-edit-room/{{vid._id}}" class="btn btn-secondary">Update</a></td>
         <td><button  (click)="deleteRoom(vid)" class="btn btn-danger">Delete</button></td>
 

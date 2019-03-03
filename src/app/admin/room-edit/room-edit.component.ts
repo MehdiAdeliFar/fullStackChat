@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Room} from "../../../Room";
-import {BackendService} from "../../backend.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Room} from '../../../Room';
+import {BackendService} from '../../backend.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 
 @Component({
@@ -16,7 +16,7 @@ export class RoomEditComponent implements OnInit {
   error: string;
   private login: string;
 
-  constructor(private location: Location, private bService: BackendService, private router: Router,private route:ActivatedRoute) {
+  constructor(private location: Location, private bService: BackendService, private router: Router, private route: ActivatedRoute) {
   }
 
   getRoom() {
