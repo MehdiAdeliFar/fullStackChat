@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {BackendService} from '../backend.service';
 import {Room} from '../../Room';
 import {Router} from '@angular/router';
+import {ChatService} from '../chat.service';
 
 @Component({
   selector: 'app-list',
@@ -13,7 +14,7 @@ export class ListComponent implements OnInit {
   login: string;
   @Input() searchQuery = '';
 
-  constructor(private httpService: BackendService, private router: Router) {
+  constructor(private httpService: BackendService, private router: Router, private chatService: ChatService) {
   }
 
   getQueryFilteredRooms(): Room[] {
@@ -33,7 +34,7 @@ export class ListComponent implements OnInit {
   }
 
   getLoginName() {
-    let item = localStorage.getItem('name');
+    const item = localStorage.getItem('name');
     this.login = item;
   }
 
@@ -42,4 +43,23 @@ export class ListComponent implements OnInit {
     this.getLoginName();
   }
 
+  connect() {
+    this.chatService.connect(this.login);
+  }
+
+  join() {
+    this.chatService.join( 'room1');
+  }
+
+  sendMessage() {
+    this.chatService.sendMessage( 'room1', 'Hello message');
+  }
+
+  leave() {
+    this.chatService.leave( 'room1');
+  }
+
+  disconnect() {
+    this.chatService.disconnect();
+  }
 }
