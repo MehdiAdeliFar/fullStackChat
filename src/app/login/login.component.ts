@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LoginModel} from '../../loginModel';
 import {Router} from '@angular/router';
 import {BackendService} from '../backend.service';
+import {ChatService} from '../chat.service';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +15,14 @@ export class LoginComponent implements OnInit {
   error: string;
   data: any;
 
-  constructor(private router: Router, private bService: BackendService) {
+  constructor(private router: Router, private bService: BackendService, private chatService: ChatService) {
   }
 
   ngOnInit() {
+  }
+
+  connect() {
+    this.chatService.connect(this.login);
   }
 
   authenticate() {
@@ -46,6 +51,7 @@ export class LoginComponent implements OnInit {
           if (this.data.isAdmin) {
             this.router.navigate(['rooms']);
           } else {
+            this.connect();
             this.router.navigate(['roomSelect']);
           }
 

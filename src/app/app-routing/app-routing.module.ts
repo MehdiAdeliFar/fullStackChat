@@ -7,6 +7,7 @@ import {RoomListComponent} from '../admin/room-list/room-list.component';
 import {RoomEditComponent} from '../admin/room-edit/room-edit.component';
 import {EventsComponent} from '../admin/events/events.component';
 import {MessageHistoryComponent} from '../admin/message-history/message-history.component';
+import {ChatsComponent} from '../chats/chats.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'admin-edit-room', component: RoomEditComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'history', component: MessageHistoryComponent},
-  {path: 'history/:name', component: MessageHistoryComponent}
+  {path: 'history/:name', component: MessageHistoryComponent},
+  {path: 'chats', component: ChatsComponent}
 
 ];
 

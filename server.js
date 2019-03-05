@@ -1,7 +1,7 @@
 const app = require('./backend/app');
 const http = require('http');
 const io = require('socket.io');
-const eventManager=require('./backend/eventManager');
+const eventManager = require('./backend/eventManager');
 
 const port = process.env.PORT || "3000";
 
@@ -15,27 +15,78 @@ server.listen(port
 );
 let chatIo = io.listen(server);
 
+function getUserName(socket) {
+  let record = eventManager.userSokcets.filter(a => a.socketId == socket.id);
+  return record.length > 0 ? record[0].username : ''
+}
+
+function sendMessage(socket, data) {
+  console.log(socket.rooms);
+  let userName = getUserName(socket);
+  eventManager.saveEvent('send message', userName, `message: ${data.message} sent to room: ${data.roomName}`);
+  console.log('message sent from ' + socket.id);
+  eventManager.saveMessage(data.message, data.roomName, userName, "message");
+  chatIo.to(data.roomName).emit('new-message', {
+    text: data.message,
+    username: userName,
+    date: new Date(),
+    type: 'message',
+    roomName: data.roomName
+  });
+}
+
 chatIo.on('connection', (socket) => {
   let username = socket.handshake.query.username;
-  eventManager.saveEvent('connect',username,'user connected');
-  eventManager.userSokcets.push({username:username,socketId:socket.id});
-  console.log(socket.id);
-  // console.log(socket);
+  console.log(`${username} connected`);
+  eventManager.saveEvent('connect', username, 'user connected');
+  eventManager.userSokcets.push({username: username, socketId: socket.id});
   socket.on('disconnect', () => {
     console.log("socket disconnected");
-    console.log(socket.id);
-    console.log(eventManager.userSokcets.filter(a=>a.socketId==socket.id));
+    eventManager.saveEvent('disconnect', getUserName(socket), 'user disconnected');
+    eventManager.removeUserfromRooms(getUserName(socket));
   });
+
+
+
   socket.on('send-message', data => {
-    console.log("send message");
-    console.log(data);
+    sendMessage(socket, data);
+
   });
+
+
+
   socket.on('join', data => {
-    console.log("join");
-    console.log(data)
-  });
-  socket.on('leave', data => {
+    let userName = getUserName(socket);
+    eventManager.saveEvent('join room', userName, `user joined to room: ${data.roomName}`);
+    eventManager.addMember2Room(data.roomName, userName);
+
+    chatIo.in(data.roomName).emit('new-message', {
+      text: `${userName} joined to room`,
+      username: userName,
+      date: new Date(),
+      type: 'join',
+      roomName: data.roomName
+    });
+    socket.join(data.roomName);
     console.log("leave");
     console.log(data);
+  });
+
+
+
+  socket.on('leave', data => {
+    eventManager.saveEvent('leave room', getUserName(socket), `user left the room: ${data.roomName}`);
+    let userName = getUserName(socket);
+    socket.leave(data.roomName);
+    eventManager.removeMemberFromRoom(data.roomName, userName);
+    chatIo.to(data.roomName).emit('new-message', {
+      text: `${username} left the room`,
+      username: userName,
+      date: new Date(),
+      type: 'left',
+      roomName: data.roomName
+    });
+
+    console.log("leave");
   })
 });

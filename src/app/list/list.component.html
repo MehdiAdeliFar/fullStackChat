@@ -1,10 +1,7 @@
 <nav class=" navbar navbar-light bg-light">
   <span>Room List</span>
-  <button (click)="connect()" class="btn btn-warning">connect</button>
-  <button (click)="join()" class="btn btn-warning">join</button>
-  <button (click)="sendMessage()" class="btn btn-warning">send message</button>
-  <button (click)="leave()" class="btn btn-warning">leave</button>
-  <button (click)="disconnect()" class="btn btn-warning">disconnect</button>
+
+
   <span>{{login}}</span>
   <button (click)="logout()"  class="btn btn-primary float-right">Logout</button>
 </nav>
@@ -31,8 +28,7 @@
         <td>{{vid.date|date:'yyyy/MM/dd hh:mm:ss'}} </td>
         <td>{{vid.members.length}}</td>
 
-        <td><a  href="/join/{{vid._id}}" class="btn btn-secondary">Join</a></td>
-        <!--todo make join work-->
+        <td><button (click)="join(vid.name)" class="btn btn-secondary">Join</button></td>
       </tr>
     </table>
   </div>

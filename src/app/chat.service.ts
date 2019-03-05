@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
 import * as io from 'socket.io-client';
 import {Observable} from 'rxjs';
+import {leave} from '@angular/core/src/profile/wtf_impl';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  private socket;
+  socket;
+  roomName: string;
 
   constructor() {
   }
@@ -16,15 +18,17 @@ export class ChatService {
   }
 
   disconnect() {
+    this.leave();
     this.socket.disconnect();
   }
 
-  join( roomName: string) {
-    this.socket.emit('join', { roomName: roomName});
+  join(roomName: string) {
+    this.socket.emit('join', {roomName: roomName});
+    this.roomName = roomName;
   }
 
-  sendMessage( roomName: string, message: string) {
-    this.socket.emit('send-message', { roomName: roomName, message: message});
+  sendMessage(message: string) {
+    this.socket.emit('send-message', {roomName: this.roomName, message: message});
   }
 
   getMessage() {
@@ -35,7 +39,8 @@ export class ChatService {
     });
   }
 
-  leave( room1: string) {
-    this.socket.emit('leave', { roomName: room1});
+  leave() {
+    this.socket.emit('leave', {roomName: this.roomName});
+    this.roomName = undefined;
   }
 }

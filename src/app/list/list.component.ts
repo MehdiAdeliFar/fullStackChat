@@ -10,7 +10,7 @@ import {ChatService} from '../chat.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  list: Room[];
+  list: Room[] = [];
   login: string;
   @Input() searchQuery = '';
 
@@ -24,12 +24,14 @@ export class ListComponent implements OnInit {
 
   logout() {
     localStorage.clear();
+    this.disconnect();
     this.router.navigate(['login']);
   }
 
   getRooms() {
     this.httpService.getRooms().subscribe(roomList => {
       this.list = roomList;
+      this.checkConnection();
     }, er => this.router.navigate(['login']));
   }
 
@@ -38,26 +40,24 @@ export class ListComponent implements OnInit {
     this.login = item;
   }
 
+  checkConnection() {
+    if (!this.chatService.socket) {
+      this.chatService.connect(this.login);
+    }
+  }
+
   ngOnInit() {
     this.getRooms();
     this.getLoginName();
+
   }
 
-  connect() {
-    this.chatService.connect(this.login);
+
+  join(roomName) {
+    this.chatService.join(roomName);
+    this.router.navigate(['chats']);
   }
 
-  join() {
-    this.chatService.join( 'room1');
-  }
-
-  sendMessage() {
-    this.chatService.sendMessage( 'room1', 'Hello message');
-  }
-
-  leave() {
-    this.chatService.leave( 'room1');
-  }
 
   disconnect() {
     this.chatService.disconnect();
