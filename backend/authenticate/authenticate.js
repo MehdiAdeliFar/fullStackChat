@@ -26,7 +26,7 @@ router.post('', (req, res) => {
   let password="fullstack";
   mongoose.connect(config.dbAddress, err => {
     if (err) throw  err;
-    user.countDocuments({}, (err, cnt) => {
+    user.countDocuments({isAdmin:true}, (err, cnt) => {
       if (err) throw  err;
       if (cnt <= 0) {          //add admin record
         const admin = user({
