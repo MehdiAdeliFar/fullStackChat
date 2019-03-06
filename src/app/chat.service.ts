@@ -14,7 +14,7 @@ export class ChatService {
   }
 
   connect(username: string) {
-    this.socket = io('localhost:3000', {query: `username=${username}`});
+    this.socket = io(`http://${location.hostname}:3000`, {query: `username=${username}`});
   }
 
   disconnect() {

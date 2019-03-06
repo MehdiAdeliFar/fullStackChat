@@ -14,16 +14,18 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class BackendService {
-  apiAddress = 'http://localhost:3000/api';
+  apiAddress =  `http://${location.hostname}:3000/api`;
   data: any;
-  login(loginModel: LoginModel) {
 
+  login(loginModel: LoginModel) {
+    console.log(location.hostname);
     return this.http.post(this.apiAddress + '/auth/', loginModel, httpOptions);
   }
 
 
   constructor(private http: HttpClient) {
   }
+
   getRooms(): Observable<Room[]> {
 
     return this.http.get<Room[]>(this.apiAddress + '/room', this.getHttpOptions());
